@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nhaga.github.io/python-workshop/sitemap.xml.gz
