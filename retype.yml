@@ -1,0 +1,21 @@
+input: .
+output: .retype
+url: https://nhaga.github.io/python-workshop/
+branding:
+  title: Ithaca Finance
+  label: Docs
+  # logo: images/favicon.svg
+  colors:
+    label:
+      test: '#ff9828'
+links:
+    - text: Landing Page
+      link: https://landingpage.dev.ithaca.finance/
+      icon: book
+      target: blank
+    - text: DApp
+      link: https://www.dev.ithaca.finance/
+      icon: book
+      target: blank
+footer:
+  copyright: "&copy; Copyright Ithaca {{ year }}. All rights reserved."
