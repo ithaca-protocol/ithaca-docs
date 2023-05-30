@@ -26,9 +26,13 @@
 * [Margin Trading and Liquidation Process](margin-trading-and-liquidation-process.md)
 * [Liquidation Engine](liquidation-engine.md)
 
-## Smart Contracts
+## Products
 
-* [Page 1](smart-contracts/page-1.md)
+* [Bet](products/bet.md)
+* [Earn](products/earn.md)
+* [Barrier Options](products/barrier-options.md)
+* [Twin - Win](products/twin-win.md)
+* [Bonus](products/bonus.md)
 
 ## Links
 
