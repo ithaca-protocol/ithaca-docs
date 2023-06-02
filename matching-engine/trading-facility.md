@@ -2,7 +2,7 @@
 
 **End of Trading**
 
-Trading in a Elektro contract will typically cease 2 hours before the Maturity of the contract. After the End of Trading the Elektro Platform will reject any new orders for such contract.
+Trading in a Ithaca contract will typically cease 2 hours before the Maturity of the contract. After the End of Trading the Ithaca Platform will reject any new orders for such contract.
 
 **Orders and Orderbooks**
 
@@ -16,7 +16,7 @@ Any unexecuted parts of the order are cancelled. Partial executions are accepted
 
 **Multi-Leg Conditional Orders**
 
-Elektro allows for the submission of conditional orders
+Ithaca allows for the submission of conditional orders
 
 Such orders consist of two or more legs. Each leg of the conditional order enters the matching engine as a separate order. Legs of a conditional order can be BUY or SELL orders. The order legs can be orders for any contract tradable on the platform. A conditional order can be fully executed if all its legs can be fully executed; or it can be partially executed if all its legs can be executed in the same pro-rata fraction.
 

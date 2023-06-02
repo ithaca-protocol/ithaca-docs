@@ -1,20 +1,22 @@
 ---
-description: The Elektro Clearing Engine is a multi-product cross-orderbook matching engine
+description: >-
+  The Ithaca Matching Engine (IME) is a multi-product cross-orderbook matching
+  engine
 ---
 
-# Elektro Clearing Engine (ECE)
+# Ithaca Matching Engine
 
-ECE has 3 key elements.&#x20;
+Ithaca Matching Engine has 3 key elements.&#x20;
 
-1\) **Replication** - ECE decomposes financial contracts into packages of 'atomic' instruments using put-call parity relationships. Therefore, orders are matched at the atomic instrument level.
+1\) **Replication** - IME decomposes financial contracts into packages of 'atomic' instruments using put-call parity relationships. Therefore, orders are matched at the atomic instrument level.
 
 2\) **Conditional orders** - 'Synthetic' orders are formed by replication principles while the matching engine algorithm ensures simultaneous consistent execution.
 
-3\) **Mixed Integer Programming (MIP) Optimization -** MIP allows searching for clearing prices and associated sets of consistent orders satisfying them that maximize executed volume and satisfy best execution requirements.
+3\) **Mixed Integer Programming (MIP) Optimization -** MIP allows searching for clearing prices and associated sets of consistent orders satisfying them that maximise executed volume and satisfy best execution requirements.
 
-The Elektro Clearing Engine (ECE) is composed of discrete-time (periodic), uniform-price (one price per instrument per auction), double (orders submitted by buyers and sellers) auctions that allow for the pooling of orders for different underlying instruments and payoffs and thus the utilization of multiple different sources of liquidity that normally clear in isolation from each other. The ECE, therefore, constitutes the foundation of a marketplace in which growth and liquidity generation are supported by ECE-intrinsic, multiple-sided network effects.
+The Ithaca Matching Engine (IME) is composed of discrete-time (periodic), uniform-price (one price per instrument per auction), double (orders submitted by buyers and sellers) auctions that allow for the pooling of orders for different underlying instruments and payoffs and thus the utilisation of multiple different sources of liquidity that normally clear in isolation from each other. The IME, therefore, constitutes the foundation of a marketplace in which growth and liquidity generation are supported by IME-intrinsic, multiple-sided network effects.
 
-In the standard continuous order book methodology, price discovery for each instrument happens in the context of each order book as a silo, with "cross order book" or "cross instrument" liquidity delivered haphazardly and, on an ad-hoc basis. The ECE is a mechanism for harnessing, in a systematic fashion, all market making tools and making them accessible to every market participant.
+In the standard continuous order book methodology, price discovery for each instrument happens in the context of each order book as a silo, with "cross order book" or "cross instrument" liquidity delivered haphazardly and, on an ad-hoc basis. The IME is a mechanism for harnessing, in a systematic fashion, all market making tools and making them accessible to every market participant.
 
 Buy and Sell orders, including orders for pre-packaged and structured products and conditional orders are matched based on the principles of maximum matched volume and minimum surplus across all orderbooks covered. If several possible sets of match prices exist that would result in the same amount of total matched volume and the same volume of surplus across all orderbooks, the set of match prices within the group of possible sets that results in the smallest total price deviation to the previous set of reference prices across all orderbooks will be the determined set of match prices.
 
@@ -28,7 +30,7 @@ The MIP approach simultaneously looks for clearing prices and a set of orders sa
 
 ### 1.1 Challenge
 
-Clearing a single book is conceptually straightforward - regular exchanges do it all the time. The difference in the Elektro set-up is the presence of Conditional Orders - orders on more than one token, which execute conditional on the net price of the tokens, and conditional on the presence of other orders to clear against. Suddenly, the clearing of one book depends on another — a conditional order may provide a competitively-priced fill, but only if its other leg is also filled in another book, etc.&#x20;
+Clearing a single book is conceptually straightforward - regular exchanges do it all the time. The difference in the Ithaca set-up is the presence of Conditional Orders - orders on more than one token, which execute conditional on the net price of the tokens, and conditional on the presence of other orders to clear against. Suddenly, the clearing of one book depends on another — a conditional order may provide a competitively-priced fill, but only if its other leg is also filled in another book, etc.&#x20;
 
 Given prices, it is fairly straightforward to determine a set of clearing orders that maximizes volume. Conversely, given a set of clearing orders, it is straightforward to find a price that satisfies them. What is difficult is to do both at the same time.&#x20;
 
@@ -44,7 +46,7 @@ MIP is an optimisation technique, solving Linear Programming problems, but with 
 
 At the most general way, the clearing problem can be specified as follows:&#x20;
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 Without condition (3), this would be a linear program, however we must also search over prices, and in turn eligibility of the orders for clearing.&#x20;
 
@@ -52,20 +54,20 @@ Assuming for a moment we can solve this problem via some kind of iterative appro
 
 Fortunately, this kind of condition is readily expressible in the MIP framework. Consider the following inequality:
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 where _`M`_ is a large parameter. If _`i = 0`_, the inequality reduces to _`x ≤ y`_, but if _`i = 1`_ and _`M`_ is sufficiently large, the inequality is automatically satisfied, and the condition specifies no relationship between _`x`_ and _`y`_.
 
 The problem above can thus be augmented as follows:
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 Note that all inequalities are linear, so we satisfy the requirements of linearity. Further, conditions (9) and (10) imply that _`wj · p ≤ lj ⇐⇒ ij = 1`_. Indeed, for carefully chosen values of `A` and `B` constraints, if _`wj · p ≤ lj`_ , then (9) implies _`ij = 1`_ (otherwise the inequality cannot be satisfied). Conversely, if _`ij = 1`_, inequality (10) reduces to _`wj · p − lj ≤ 0`_. Finally, inequality (13) implies that if _`ij = 0`_, the associated traded quantity _`xj`_ must also be 0.
 
 Consequently, the following are true:&#x20;
 
 1. The optimisation program is a linear, mixed-integer program, and readily solvable with off-the-shelf solvers
-2. The optimisation problem also encodes (part of) the Elektro rules for clearing books: choose prices and orders satisfying them, such that the orders clear, and such that the overall crossed volume is maximised
+2. The optimisation problem also encodes (part of) the Ithaca rules for clearing books: choose prices and orders satisfying them, such that the orders clear, and such that the overall crossed volume is maximised
 3. Thanks to the formulation, the order selection and price determination happen automatically. The search over prices and order sets occurs inside the MIP solver, in a computationally-efficient way.
 4. A regular linear program would not be sufficient here; if the variables _`ij`_ are allowed to take fractional values between 0 and 1, the logic encoding no longer works.
 
@@ -99,13 +101,13 @@ The following steps are taken:
 
 If orders are on opposite sides, or acquire different proportions of tokens, they are not grouped. Each group has weights w associated with it, describing what tokens are being traded in the group, normalised so that
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 For the above examples, the weights will be _`(1), (0.5, −0.5), (−0.5, 0.5)`_. I refer to these associations as groups.
 
 2\. Within a group, I order and sub-group orders by price, from most aggressive to least aggressive. A sub-group of orders in the same group, and with the same price, is referred to as an _interval_. Each interval has a quantity _`q`_ associated with it, which the maximal amount of tokens that can be filled at this price. The price condition is expressed as
 
-<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 Examples:&#x20;
 
